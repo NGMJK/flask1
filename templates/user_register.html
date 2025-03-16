@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>   
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</div>
+
+<div class="centre-add-container">
+    <h3>Add New User</h3>
+    <form action="{{ url_for('user_register')}}" method="POST">
+        <!-- user email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="" required>
+        </div>
+
+        <!-- First name -->
+        <div class="form-group">
+            <label for="first_name">Firts Name</label>
+            <input type="text" name="first_name" id="" required>
+        </div>
+
+            <!-- Last_name -->
+            <div class="form-group">
+            <label for="last_name">last_name</label>
+            <input type="text" name="last_name" id="" required>
+        </div>
+
+        <!-- password -->
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" name="password" id="" required>
+        </div>
+
+    
+        <!-- Branch Selection -->
+        <div class="form-group">
+            <label for="branch_id">Assign Branch Office:</label>
+            <select name="branch_id" id="branch_id" required>
+                <option value="" disabled selected>Select Branch</option>
+                {% for b in branch %}
+                    <option value="{{ b.id }}">{{ b.branch_name }} </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Add User">
+        </div>
+    </form>
+</div>
+{% endblock %}

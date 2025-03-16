@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="centre-add-container">
+        <h3>Add New Centre</h3>
+        <form action="{{ url_for('centre_add')}}" method="POST">
+             <!-- Branch Selection -->
+            <div class="form-group">
+                <label for="branch_id">Assign Branch Office:</label>
+                <select name="branch_id" id="branch_id" required>
+                    <option value="" disabled selected>Select Branch</option>
+                    {% for b in branches %}
+                        <option value="{{ b.id }}">{{ b.branch_name }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- User Selection -->
+            <div class="form-group">
+                <label for="user_id">Assign Loan Officer:</label>
+                <select name="user_id" id="user_id" required>
+                    <option value="" disabled selected>Select User</option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Centre Name -->
+            <div class="form-group">
+                <label for="centre_name">Centre Name:</label>
+                <input type="text" name="centre_name" id="centre_name" required>
+            </div>
+            
+            <!-- RM Date -->
+            <div class="form-group">
+                <label for="last_rm_date">Last RM Date:</label>
+                <input type="date" name="last_rm_date" id="last_rm_date" required>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" name="location" id="location" required>
+            </div>
+             <!-- Distance -->
+             <div class="form-group">
+                <label for="distance">Number of Groups:</label>
+                <input type="number" name="distance" id="distance" required>
+            </div>
+
+            <!-- Chairperson -->
+            <div class="form-group">
+                <label for="chairperson">Chairperson:</label>
+                <input type="text" name="chairperson" id="chairperson" required>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group">
+                <label for="contact_num">Contact Number:</label>
+                <input type="text" name="contact_num" id="contact_num" required>
+            </div>
+
+            
+            <div class="form-group">
+                <input type="submit" value="Add Centre">
+            </div>
+        </form>
+    </div>
+{% endblock %}

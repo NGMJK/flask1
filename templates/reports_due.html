@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Display Today's Date -->
+<div class="container">
+    <div class="reports-due-container">
+        <h2>Centre Reports Due</h2>
+
+        {% if reports_due | length < 1 %}
+            <h3>There are no reports pending...</h3>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Branch</th>
+                    <th>Centre Name</th>
+                    <th>Loan Officer</th>
+                    <th>Due Date</th>
+                    <th>Report</th>
+                </tr>
+
+                {% for report in reports_due %}
+                    <tr>
+                        <td>{{ report.branch_office.branch_name }}</td>
+                        <td>{{ report.centre_name }}</td>
+                        <td>{{ report.assigned_user.first_name }} {{ report.assigned_user.last_name }}</td>
+                        <td>{{ report.last_rm_date.strftime('%d-%b-%Y')}} </td>
+                        <td>
+                            
+                            <a href="{{ url_for('report_submit', id=report.id) }}">Add report</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

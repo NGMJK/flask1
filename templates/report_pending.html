@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Display Today's Date -->
+<div class="container">
+    <div class="reports-due-container">
+        <h2> Reports Pending Approval</h2>
+        {% for report in reports_due %}
+
+            {{ report.approved }}
+        {% endfor %}
+
+        {% if reports_due | length < 1 %}
+            <h3>There are no reports pending...</h3>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Branch</th>
+                    <th>Centre Name</th>
+                    <th>Loan Officer</th>
+                    <th>Rating</th>
+                    <th>Due Date</th>
+                    <th>Report</th>
+                </tr>
+
+                {% for report in reports_due %}
+                    <tr>
+                        <td>{{ report.active_centres.branch_office.branch_name }}</td>
+                        <td>{{ report.active_centres.centre_name}}</td>
+                        <td>{{ report.active_centres.assigned_user.first_name}} {{ report.active_centres.assigned_user.last_name}}</td>
+                        <td>{{ report.get_rating()}}%</td>
+                        <td>{{ report.rm_date.strftime('%d-%b-%Y')}} </td>
+                        <td><a href="{{ url_for('report_approve', id=report.id) }}"> Approve</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

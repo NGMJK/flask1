@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="report-submit-container"> 
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <p class="{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="centre-add-container">
+           
+            <h3>Report Submit</h3>
+        <!-- Report Submission Form -->
+            <form action="/report/submit/{{ report_submit.id }}" method="POST" enctype="multipart/form-data">
+                <!-- Number of Groups -->
+                <div class="form-group">
+                    <label for="num_groups">Number of Groups:</label>
+                    <input type="number" name="num_groups" id="num_groups" required>
+                </div>
+                  <!-- Paid -->
+                <div class="form-group">
+                    <label for="paid">Centre Collections:</label>
+                    <input type="number" name="paid" id="paid" required>
+                </div>
+
+                   <!-- loan balance -->
+                <div class="form-group">
+                    <label for="loan_balance">Centre Loan Bance:</label>
+                    <input type="number" name="loan_balance" id="loan_balance" required>
+                </div>
+
+                  <!-- Attendance -->
+                <div class="form-group">
+                    <label for="attendance">Attendance:</label>
+                    <input type="number" name="attendance" id="attendance" required>
+                </div>
+                <!-- Savings -->
+                <div class="form-group">
+                    <label for="savings">Savings:</label>
+                    <input type="number" name="savings" id="savings" required>
+                </div>
+                <!-- Start Time -->
+                <div class="form-group">
+                    <label for="start_time">Start Time:</label>
+                    <input type="time" name="start_time" id="start_time" required>
+                </div>
+                <!-- End Time -->
+                <div class="form-group">
+                    <label for="end_time">End Time:</label>
+                    <input type="time" name="end_time" id="end_time" required>
+                </div> 
+                <!-- Num Packages -->
+                <div class="form-group">
+                    <label for="num_packages">New loan applications:</label>
+                    <input type="number" name="num_packages" id="num_packages" required>
+                </div>                 
+                <!-- file upload -->
+                <div class="form-group">
+                    <label for="photo">Attach Photo:</label>
+                    <input type="file" name="photo" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit Report">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{ report_submit.id }}
+{% endblock %}

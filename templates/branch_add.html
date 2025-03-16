@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="centre-add-container">
+    <h3>Add New Branch </h3>
+    <form action="/branch/add" method="POST">
+        <label for="branch_name">Branch</label>
+        <input type="text" name="branch_name" id=""><br>
+        <input type="submit" name="" id="" value="Submit">
+    </form>
+</div>
+
+
+{% for b in branch %}
+{{ b.branch_name}}
+
+{% endfor %}
+
+{% endblock %}

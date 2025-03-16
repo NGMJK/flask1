@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Branch Centre System</title>
+</head>
+
+<body>
+    <nav>  
+    <div class="nav-logo">MicroLoan System</div>
+    
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Centres</a>
+        <a href="{{ url_for('report_due') }}">Reports Due</a>
+        <a href="{{ url_for('report_pending') }}">Reports Pending</a>
+        <a href="{{ url_for('centre_add') }}">Add Centre</a>
+        <a href="{{ url_for('branch_add')}}">Add Branch</a>
+        <a href="{{ url_for('user_register')}}">Add User</a>
+        
+    </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
+
+

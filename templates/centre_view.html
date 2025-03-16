@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="centre-reports">
+    <!-- Centre Info Section -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Loan Officer</th>
+                    <th>Centre</th>
+                    <th>Location</th>
+                    <th>Centre Leader</th>
+                    <th>Contact</th>
+                    <th>Centre Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="{{url_for('centre_view',id=centre.assigned_user.id)}}"><h3>Loan Officer: {{centre.assigned_user.first_name}} {{centre.assigned_user.last_name}}</h3></a></td>
+                    <td><h4>{{ centre.centre_name }}</h4></td>
+                    <td><h4>{{ centre.location }}</h4></td>
+                    <td><h4>{{ centre.chairperson }}</h4></td>
+                    <td><h4>{{ centre.contact_num }}</h4></td> 
+                    <td><h4>{{ average_rating }}%</h4></td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+<div class="centre-view-container">      
+    <div class="centre-reports">
+        <h3>Centre Reports</h3>
+        {% if report | length < 1 %}
+            <h3>There are no reports...</h3>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>RM Date</th>
+                        <th>Report Rating</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for report in report %}
+                    <tr>
+                        <td>{{ report.rm_date.strftime('%d-%b-%Y')}}</td>
+                        <td>{{ report.get_rating()}}%</td> 
+                        <td>
+                            <a href="#"><button class="btn view-btn-2">View</button></a>
+                            <a href="#"><button class="btn download-btn-2">Download</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+
+{% broke content %}
+    {% if report.photo %}
+        <img src="{{ url_for('static', filename='uploads/' + report.photo) }}" alt="Centre Report Photo" width="200">
+        {% else %}
+        <p>No photo attached</p>
+    {% endif %}
+{% endblock %}

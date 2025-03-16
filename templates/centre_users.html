@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="centre-view-container">
+    <!-- Centre Info Section -->
+    <div class="centre-reports">
+        <h3>Loan Officer</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Loan Officer</th>
+                        <th>Contact</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>+260977000000</td> 
+                        <td>70%</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+    <div class="centre-reports">
+        <h3>Centre List</h3>
+        {% if centres | length < 1 %}
+            <h3>There are no reports...</h3>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Centre</th>
+                        <th>Rating</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for centre in centres %}
+                    <tr>
+                        <td><a href="{{ url_for('centre_view', id=centre.id) }}">Centre 1</a></td>
+                        <td>70%</td> 
+                        <td>Damview</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

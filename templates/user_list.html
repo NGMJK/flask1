@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h2>User List</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if users | length < 1 %}
+        <h3>No users found...</h3>
+    {% else %}
+    <table>
+        <tr>
+            <th>Branch</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Number of Centres</th>
+            <th>Rating</th>
+            <th>View Centres</th>
+        </tr>
+
+        {% for user in users %}
+        <tr>
+            <td>Chipata</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.centres | length }}</td>
+            <td>{{ user.rating if user.rating else 'N/A' }}</td>
+            <td><a href="{{ url_for('centre_view', id=user.id) }}">View Centres</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

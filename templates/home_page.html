@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="page-title">Active Centres</h2>
+    <!--<h4>Total active centres: {{ centres | length}} </h4>
+    <p>Overall centre rating: {{ average_rating }}%</p> -->
+    
+
+    {% if centres | length < 1 %}
+        <h3 class="no-data">There are no centres available.</h3>
+    {% else %}
+
+    <table class="centres-table">
+        <thead>
+            <tr>
+                <th>Branch</th>
+                <th>Centre</th>
+                <th>Location</th>
+                <th>Groups</th>
+                <th>Loan Officer</th>
+                <th>Rating</th>
+                <th>Infor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for centre in centres %}
+            <tr>
+                <td>{{ centre.assigned_user.branch_office.branch_name }}</td>
+                <td>{{ centre.centre_name }}</td>
+                <td>{{ centre.location }}</td>
+                <td>{{ centre.get_latest_report().num_groups if centre.get_latest_report().num_groups  else 'N/A'}}</td>
+                <td>{{ centre.assigned_user.first_name }} {{ centre.assigned_user.last_name }}</td>
+                <td>{{ centre.get_centre_rating()}}%</td> 
+                <td><a href="{{ url_for('centre_view', id=centre.id) }}" class="view-btn">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endif %}
+</div>
+{% endblock %}
